@@ -1,2 +1,2 @@
 # Phonable
-Script that install automatically applications on linux machine
+Bash sript that install automatically applications on linux machine and remove unnecessary packages
