@@ -7,8 +7,8 @@ List_packages_to_remove=("kdeconnect" "kwalletmanager" "okular" "xterm" "virt-ma
 function terminal_config {
   echo "Choose Konsole terminal emulator"
   sudo update-alternatives --config x-terminal-emulator
-  rm ~/.kde/share/config/kdeglobals
-  cp kdeglobals ~/.kde/share/config/kdeglobals
+  cp Retro_maze.colorscheme ~/.local/share/konsole/
+  konsoleprofile "colors=Retro_maze"
   source ~/.bashrc
 }
 
@@ -22,18 +22,19 @@ function main_installation {
           sudo apt-get --yes install $Package
         fi
       done
+  sudo apt-get -f install
 
   for Package_delete in "${List_packages_to_remove[@]}";
         do
           PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $Package_delete | grep "install ok installed")
-          echo Checking for $List_packages_to_install: $PKG_OK
-          if [ "" = "$PKG_OK" ]; then
-            echo "No $Package_delete. Setting up $Package_delete."
-            sudo apt-get --yes remove $Package
+          echo Checking for $List_packages_to_remove: $PKG_OK
+          if [ "install ok installed" = "$PKG_OK" ]; then
+            echo "$Package_delete installed. Deletion of $Package_delete."
+            sudo apt-get --yes remove $Package_delete
           fi
         done
+  apt autoremove
   #install_package "$List_packages_to_install_snap" "sudo snap install $Package"
-  sudo apt-get -f install
   terminal_config
 }
 
