@@ -7,9 +7,15 @@ List_packages_to_remove=("kdeconnect" "kwalletmanager" "okular" "xterm" "virt-ma
 function terminal_config {
   echo "Choose Konsole terminal emulator"
   sudo update-alternatives --config x-terminal-emulator
-  cp Retro_maze.colorscheme ~/.local/share/konsole/
-  konsoleprofile "colors=Retro_maze"
+
+  bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+
+  #écriture des alias
+  cp bash_config ~/.bashrc
   source ~/.bashrc
+
+  mv Kali.profile ~/.local/share/konsole/
+  mv Retro_maze.colorscheme ~/.local/share/konsole/
 }
 
 function main_installation {
@@ -38,26 +44,20 @@ function main_installation {
   terminal_config
 }
 
-function vm_pentest {
-  echo "vm_pentest"
-}
-
 function server {
   echo "server"
 }
 
 PS3='Please enter your choice: '
-user_choice=("Main installation" "VM for pentesting" "Server" "Quit")
+user_choice=("Full installation" "Terminal installation" "Server" "Quit")
 select input in "${user_choice[@]}"
 do
     case $input in
-        "Main installation")
-            echo "you chose choice 1"
+        "Full installation")
             main_installation
             ;;
-        "VM for pentesting")
-            echo "you chose choice 2"
-            vm_pentest
+        "Terminal installation")
+            terminal_config
             ;;
         "Server")
             echo "you chose choice $REPLY which is $opt"
