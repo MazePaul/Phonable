@@ -11,11 +11,11 @@ function terminal_config {
   bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
 
   #écriture des alias
-  cp bash_config ~/.bashrc
+  cp term_config/bash_config ~/.bashrc
   source ~/.bashrc
 
-  mv Kali.profile ~/.local/share/konsole/
-  mv Retro_maze.colorscheme ~/.local/share/konsole/
+  mv term_config/Kali.profile ~/.local/share/konsole/
+  mv term_config/Retro_maze.colorscheme ~/.local/share/konsole/
 }
 
 function main_installation {
@@ -42,14 +42,23 @@ function main_installation {
   apt autoremove
   #install_package "$List_packages_to_install_snap" "sudo snap install $Package"
   terminal_config
+  theme_config
 }
 
-function server {
-  echo "server"
+function theme_config {
+  sudo add-apt-repository ppa:papirus/papirus
+  sudo apt update
+  sudo apt install qt5-style-kvantum qt5-style-kvantum-themes
+  
+  sudo apt-get install latte-dock
+  cp maze.layout.latte ~/.config/latte/
+
+  #cp Layan ~/.config/Kvantum
+  #cp kvantum.kvconfig ~/.config/Kvantum
 }
 
 PS3='Please enter your choice: '
-user_choice=("Full installation" "Terminal installation" "Server" "Quit")
+user_choice=("Full installation" "Terminal installation" "Theme installation" "Quit")
 select input in "${user_choice[@]}"
 do
     case $input in
@@ -59,9 +68,8 @@ do
         "Terminal installation")
             terminal_config
             ;;
-        "Server")
-            echo "you chose choice $REPLY which is $opt"
-            server
+        "Theme installation")
+            theme_config
             ;;
         "Quit")
             break
