@@ -1,0 +1,63 @@
+# Enable the subsequent settings only in interactive sessions
+case $- in
+  *i*) ;;
+    *) return;;
+esac
+
+# Path to your oh-my-bash installation.
+export OSH=/home/$USER/.oh-my-bash
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-bash is loaded.
+OSH_THEME="bakke"
+
+# Uncomment the following line to use case-sensitive completion.
+CASE_SENSITIVE="true"
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# To disable the uses of "sudo" by oh-my-bash, please set "false" to
+OMB_USE_SUDO=true
+
+completions=(
+  git
+  composer
+  ssh
+)
+
+aliases=(
+  general
+)
+
+plugins=(
+  git
+  bashmarks
+)
+
+source "$OSH"/oh-my-bash.sh
+
+# some aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias vi='vim'
+alias svi='sudo vi'
+alias vps='ssh -i ~/.ssh/apb_serveur root@mazepaul.com'
+alias vpn_down='wg-quick down wg0'
+alias vpn_up='wg-quick up wg0'
+alias phonable='cd ~ && cd Document/Programmation/IdeaProjects/Phonable'
+alias color='cd ~ && cd /home/$USER/snap && ./displaycolor.sh'
+alias ls='ls --color=auto'
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias grep='grep --color=auto'
+alias h='history'
+alias j='jobs -l'
+alias ping='ping -c 5'
+alias ports='netstat -tulanp'
+alias update='sudo apt-get update && sudo apt-get upgrade'
+alias wget='wget -c'
