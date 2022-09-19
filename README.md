@@ -1,2 +1,2 @@
 # Phonable
-Bash sript that install automatically applications on linux machine and remove unnecessary packages
+Bash sript that automatically install applications on linux machine and remove unnecessary packages
