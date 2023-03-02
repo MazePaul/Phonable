@@ -8,7 +8,7 @@ read -p "Enter user: " user
 sudo useradd $user
 sudo usermod -aG sudo $user
 sudo passwd $user
-
+ 
 echo "VIM installation + alias"
 sudo apt-get install vim
 alias="alias vi='vim'"
