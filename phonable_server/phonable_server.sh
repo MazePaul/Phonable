@@ -34,6 +34,7 @@ fi
 }
 
 function_fail2ban{
+echo "fail2ban Installation"
 sudo apt-get install fail2ban
 mv jail.conf /etc/fail2ban/jail.conf
 }
